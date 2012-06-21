@@ -12,5 +12,6 @@
 
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius;
 -(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius;
+-(void) alignItemsRadially;
 
 @end
