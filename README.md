@@ -2,6 +2,8 @@
 
 ![CCRadialMenu example](http://rpglanguage.net/kanaswirl/img/CCRadialMenu.png)
 
+(the colored dots are a separate game element not provided by `CCRadialMenu`)
+
 ##### Usage
 
     #import "CCRadialMenu.h"
