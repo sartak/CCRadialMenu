@@ -1,4 +1,4 @@
-`CCMenu`'s builtin layouts are limited to a grid. This subclass offers a radial layout for its items for spacing the items out on a circle. The following screenshot demonstrates a `CCRadialMenu` whose items are Japanese characters:
+`CCMenu`'s builtin layouts are limited to a grid. This subclass offers a radial layout for spacing its items out evenly on a circle. The following screenshot demonstrates a `CCRadialMenu` whose items are Japanese characters:
 
 ![CCRadialMenu example](http://rpglanguage.net/kanaswirl/img/CCRadialMenu.png)
 
