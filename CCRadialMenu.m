@@ -66,7 +66,7 @@
         }
     }
 
-    /* delegate for tems that move, etc */
+    /* delegate for items that move, etc */
     return [super itemForTouch:touch];
 }
 
