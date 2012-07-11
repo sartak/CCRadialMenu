@@ -11,7 +11,9 @@
 }
 
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius;
--(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius;
++(id) radialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
+-(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
 -(void) alignItemsRadially;
+-(void) swirlItemsRadially:(float)duration;
 
 @end

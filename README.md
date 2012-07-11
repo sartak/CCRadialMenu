@@ -18,3 +18,8 @@
     menu.position = ccp(100, 100);
     [menu alignItemsRadially];   /* optional */
     [self addChild:menu];
+
+Alternatively, if you want a swirl-out effect like in KanaSwirl,
+
+    CCRadialMenu *menu = [CCRadialMenu radialMenuWithArray:menuItems radius:50 swirloutDuration:1.0];
+

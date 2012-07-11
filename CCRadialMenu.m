@@ -3,34 +3,83 @@
 @implementation CCRadialMenu
 
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius {
-    return [[[self alloc] initRadialMenuWithArray:items radius:radius] autorelease];
+    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:0] autorelease];
 }
 
--(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius;
++(id) radialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration {
+    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:swirlOutDuration] autorelease];
+}
+
+-(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
 {
     if ( (self=[super initWithArray:items]) ) {
         radius_ = radius;
-        [self alignItemsRadially];
+
+        if (swirlOutDuration) {
+            [self swirlItemsRadially:swirlOutDuration];
+        }
+        else {
+            [self alignItemsRadially];
+        }
     }
     return self;
-}
-
--(CGPoint) _pointForItem:(int)i count:(int)count {
-    double sliceAngle = (2 * 3.14) / count;
-    double theta = sliceAngle * i;
-    double x = radius_ * sin(theta);
-    double y = radius_ * cos(theta);
-    return ccp(x, y);
 }
 
 -(void) alignItemsRadially
 {
     CCMenuItem *item;
     int count = [children_ count];
+    double sliceAngle = (2 * 3.14) / count;
     int i = 0;
 
     CCARRAY_FOREACH(children_, item){
-        [item setPosition:[self _pointForItem:i count:count]];
+        double theta = sliceAngle * i;
+        double x = radius_ * sin(theta);
+        double y = radius_ * cos(theta);
+
+        [item setPosition:ccp(x, y)];
+
+        ++i;
+    }
+}
+
+-(void) swirlItemsRadially:(float)duration
+{
+    CCMenuItem *item;
+    int count = [children_ count];
+    double sliceAngle = (2 * 3.14) / count;
+    double base_length = sqrt(2) * radius_;
+    int i = 0;
+
+    CCARRAY_FOREACH(children_, item){
+        double theta = sliceAngle * i;
+        double x = radius_ * sin(theta);
+        double y = radius_ * cos(theta);
+
+        ccBezierConfig bezier;
+        bezier.controlPoint_1 = ccp(radius_ * sin(theta - 3.14/4), radius_ * cos(theta - 3.14/4));
+        bezier.controlPoint_2 = ccp(base_length * sin(theta - 3.14/8), base_length * cos(theta - 3.14/8));
+        bezier.endPosition = ccp(x, y);
+
+        [item setRotation:90];
+        [item setIsEnabled:NO];
+
+        [item runAction:[CCSpawn actions:
+                         [CCRotateBy actionWithDuration:duration angle:-90],
+                         [CCBezierBy actionWithDuration:duration bezier:bezier],
+                         [CCSequence actions:
+                          [CCDelayTime actionWithDuration:duration],
+                          [CCCallBlock actionWithBlock:^(void) {
+                             [item setIsEnabled:YES];
+                          }],
+                          nil],
+                         nil]];
+
+        [item runAction:[CCSequence actions:
+                         [CCTintTo actionWithDuration:0 red:192 green:192 blue:192],
+                         [CCTintTo actionWithDuration:duration red:255 green:255 blue:255],
+                         nil]];
+
         ++i;
     }
 }
