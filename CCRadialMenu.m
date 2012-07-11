@@ -10,6 +10,7 @@
 {
     if ( (self=[super initWithArray:items]) ) {
         radius_ = radius;
+        [self alignItemsRadially];
     }
     return self;
 }
