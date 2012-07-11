@@ -15,19 +15,22 @@
     return self;
 }
 
+-(CGPoint) _pointForItem:(int)i count:(int)count {
+    double sliceAngle = (2 * 3.14) / count;
+    double theta = sliceAngle * i;
+    double x = radius_ * sin(theta);
+    double y = radius_ * cos(theta);
+    return ccp(x, y);
+}
+
 -(void) alignItemsRadially
 {
     CCMenuItem *item;
     int count = [children_ count];
-    double sliceAngle = (2 * 3.14) / count;
     int i = 0;
 
     CCARRAY_FOREACH(children_, item){
-        double theta = sliceAngle * i;
-        double x = radius_ * sin(theta);
-        double y = radius_ * cos(theta);
-
-        [item setPosition:ccp(x, y)];
+        [item setPosition:[self _pointForItem:i count:count]];
         ++i;
     }
 }
