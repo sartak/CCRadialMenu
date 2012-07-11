@@ -9,7 +9,12 @@
     #import "CCRadialMenu.h"
     
     
-    CCRadialMenu *menu = [CCRadialMenu radialMenuWithArray:menuItems radius:radius];
-    menu.position = ccp(100, 50);
-    [menu alignItemsRadially];
+    NSArray *menuItems = [NSArray arrayWithObjects:
+                            [CCMenuItemFont itemWithString:@"A"],
+                            [CCMenuItemFont itemWithString:@"B"],
+                            [CCMenuItemFont itemWithString:@"C"],
+                            nil];
+    CCRadialMenu *menu = [CCRadialMenu radialMenuWithArray:menuItems radius:50];
+    menu.position = ccp(100, 100);
+    [menu alignItemsRadially];   /* optional */
     [self addChild:menu];
