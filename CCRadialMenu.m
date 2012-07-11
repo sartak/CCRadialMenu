@@ -56,25 +56,30 @@
         double x = radius_ * sin(theta);
         double y = radius_ * cos(theta);
 
+        /* swirl */
         ccBezierConfig bezier;
         bezier.controlPoint_1 = ccp(radius_ * sin(theta - 3.14/4), radius_ * cos(theta - 3.14/4));
         bezier.controlPoint_2 = ccp(base_length * sin(theta - 3.14/8), base_length * cos(theta - 3.14/8));
         bezier.endPosition = ccp(x, y);
+        [item runAction:[CCBezierBy actionWithDuration:duration bezier:bezier]];
 
+        /* rotate */
         [item setRotation:90];
-        [item setIsEnabled:NO];
+        [item runAction:[CCRotateBy actionWithDuration:duration angle:-90]];
 
-        [item runAction:[CCSpawn actions:
-                         [CCRotateBy actionWithDuration:duration angle:-90],
-                         [CCBezierBy actionWithDuration:duration bezier:bezier],
-                         [CCSequence actions:
-                          [CCDelayTime actionWithDuration:duration],
-                          [CCCallBlock actionWithBlock:^(void) {
-                             [item setIsEnabled:YES];
-                          }],
-                          nil],
+        /* disable */
+        [item setIsEnabled:NO];
+        [item runAction:[CCSequence actions:
+                         [CCDelayTime actionWithDuration:duration],
+                         [CCCallBlock actionWithBlock:^(void) {
+                            [item setIsEnabled:YES];
+                         }],
                          nil]];
 
+        /*
+         * brighten to white.
+         * I use TintTo gray in 0s to avoid setColor: not being a method in CCMenuItem
+         */
         [item runAction:[CCSequence actions:
                          [CCTintTo actionWithDuration:0 red:192 green:192 blue:192],
                          [CCTintTo actionWithDuration:duration red:255 green:255 blue:255],
