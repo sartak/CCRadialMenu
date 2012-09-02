@@ -18,9 +18,6 @@
         if (swirlOutDuration) {
             [self swirlItemsRadially:swirlOutDuration];
         }
-        else {
-            [self alignItemsRadially];
-        }
     }
     return self;
 }
