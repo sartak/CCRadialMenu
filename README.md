@@ -21,5 +21,5 @@
 
 Alternatively, if you want a swirl-out effect like in KanaSwirl,
 
-    CCRadialMenu *menu = [CCRadialMenu radialMenuWithArray:menuItems radius:50 swirloutDuration:1.0];
+    CCRadialMenu *menu = [CCRadialMenu radialMenuWithArray:menuItems radius:50 swirlOutDuration:1.0];
 
