@@ -40,8 +40,11 @@
     }
 }
 
--(void) swirlItemsRadially:(float)duration
-{
+-(void) swirlItemsRadially:(float)duration {
+    [self swirlItemsRadially:duration adjustAnchors:NO];
+}
+
+-(void) swirlItemsRadially:(float)duration adjustAnchors:(bool)adjustAnchors {
     CCMenuItem *item;
     int count = [children_ count];
     double sliceAngle = (2 * 3.14) / count;
@@ -52,6 +55,17 @@
         double theta = sliceAngle * i;
         double x = radius_ * sin(theta);
         double y = radius_ * cos(theta);
+
+        if (adjustAnchors) {
+            if (theta <= 0.01) {
+            }
+            else if (theta <= M_PI) {
+                [item setAnchorPoint:ccp(0.2, 0.5)];
+            }
+            else if (theta > M_PI) {
+                [item setAnchorPoint:ccp(0.8, 0.5)];
+            }
+        }
 
         /* swirl */
         ccBezierConfig bezier;

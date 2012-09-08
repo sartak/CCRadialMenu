@@ -15,5 +15,6 @@
 -(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
 -(void) alignItemsRadially;
 -(void) swirlItemsRadially:(float)duration;
+-(void) swirlItemsRadially:(float)duration adjustAnchors:(bool)adjustAnchors;
 
 @end
