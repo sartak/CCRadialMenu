@@ -12,7 +12,9 @@
 
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius;
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
--(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
++(id) radialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration adjustAnchors:(bool)adjustAnchors;
+
+-(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration adjustAnchors:(bool)adjustAnchors;
 -(void) alignItemsRadially;
 -(void) swirlItemsRadially:(float)duration;
 -(void) swirlItemsRadially:(float)duration adjustAnchors:(bool)adjustAnchors;

@@ -3,20 +3,24 @@
 @implementation CCRadialMenu
 
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius {
-    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:0] autorelease];
+    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:0 adjustAnchors:NO] autorelease];
 }
 
 +(id) radialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration {
-    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:swirlOutDuration] autorelease];
+    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:swirlOutDuration adjustAnchors:NO] autorelease];
 }
 
--(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration;
++(id) radialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration adjustAnchors:(bool)adjustAnchors {
+    return [[[self alloc] initRadialMenuWithArray:items radius:radius swirlOutDuration:swirlOutDuration adjustAnchors:adjustAnchors] autorelease];
+}
+
+-(id) initRadialMenuWithArray:(NSArray *)items radius:(float)radius swirlOutDuration:(float)swirlOutDuration adjustAnchors:(bool)adjustAnchors
 {
     if ( (self=[super initWithArray:items]) ) {
         radius_ = radius;
 
         if (swirlOutDuration) {
-            [self swirlItemsRadially:swirlOutDuration];
+            [self swirlItemsRadially:swirlOutDuration adjustAnchors:adjustAnchors];
         }
     }
     return self;
