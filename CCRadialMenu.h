@@ -1,9 +1,10 @@
 #import <GameKit/GameKit.h>
 #import "cocos2d.h"
 
-@interface CCMenu (missing) {
-}
+@interface CCMenu (missing)
+
 -(CCMenuItem *) itemForTouch: (UITouch *) touch;
+
 @end
 
 @interface CCRadialMenu : CCMenu {
